@@ -53,9 +53,10 @@ model Project {
 model ProjectMember {
   userId    String
   projectId String
-  role      String    @default("member")
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  role      String  @default("member")
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
   @@id([userId, projectId])
 }
 
