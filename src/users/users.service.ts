@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { User } from '@prisma/client';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -32,7 +32,8 @@ export class UsersService {
         updatedAt: true,
       },
     });
-    return user as User | null;
+    if (!user) throw new NotFoundException(`Usuario ${id} no encontrado`);
+    return user as User;
   }
 
   async create(data: CreateUserDto): Promise<User> {
