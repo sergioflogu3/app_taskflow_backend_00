@@ -41,7 +41,7 @@ export class ProjectsService {
 
   async create(data: CreateProjectDto): Promise<Project> {
     return this.prisma.project.create({
-      data,
+      data: data as any,
     });
   }
 
